@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Szczepanski — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #141414;
+      --orange: #D4500A;
+      --off-white: #E8E0D5;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      mix-blend-mode: normal;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(80px, 14vw, 200px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+
+    .hero-headline .line-stroke {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--orange);
+    }
+
+    .hero-headline .line-fill {
+      display: block;
+      color: var(--off-white);
+    }
+
+    .hero-headline .line-accent {
+      display: block;
+      color: var(--orange);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 1px solid rgba(232, 224, 213, 0.15);
+      padding-top: 24px;
+    }
+
+    .hero-descriptor {
+      max-width: 480px;
+    }
+
+    .hero-descriptor p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--off-white);
+      opacity: 0.7;
+    }
+
+    .hero-location {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      opacity: 0.4;
+      text-align: right;
+    }
+
+    .hero-location span {
+      display: block;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    /* subtle grain overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">MS</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1 class="hero-headline">
+      <span class="line-stroke">Systems</span>
+      <span class="line-fill">Designer</span>
+      <span class="line-accent">Who Ships.</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-descriptor">
+        <p>I get into the system, understand how it actually works, align the teams, and build things that scale. Broad industry experience. No-bullshit process.</p>
+      </div>
+      <div class="hero-location">
+        <span>Based in</span>
+        Minneapolis, MN
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
