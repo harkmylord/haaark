@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Michael Szczepanski — Product Designer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/edy4igy.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --black: #141414;
+      --red: #d80000;
       --orange: #D4500A;
       --off-white: #E8E0D5;
     }
@@ -19,7 +18,7 @@
     body {
       background: var(--black);
       color: var(--off-white);
-      font-family: 'Barlow', sans-serif;
+      font-family: "space-grotesk-variable", sans-serif;
     }
 
     /* NAV */
@@ -37,7 +36,7 @@
     }
 
     .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: "space-grotesk-variable", sans-serif;
       font-weight: 800;
       font-size: 18px;
       letter-spacing: 0.05em;
@@ -53,7 +52,7 @@
     }
 
     .nav-links a {
-      font-family: 'Barlow', sans-serif;
+      font-family: "space-grotesk-variable", sans-serif;
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.08em;
@@ -71,82 +70,92 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
       position: relative;
       overflow: hidden;
+      background: #000;
     }
 
-    .hero-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(80px, 14vw, 200px);
-      line-height: 0.9;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      margin-bottom: 40px;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
     }
 
-    .hero-headline .line-stroke {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--orange);
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
     }
 
-    .hero-headline .line-fill {
-      display: block;
-      color: var(--off-white);
-    }
-
-    .hero-headline .line-accent {
-      display: block;
-      color: var(--orange);
-    }
-
-    .hero-meta {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      border-top: 1px solid rgba(232, 224, 213, 0.15);
-      padding-top: 24px;
-    }
-
-    .hero-descriptor {
-      max-width: 480px;
-    }
-
-    .hero-descriptor p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--off-white);
-      opacity: 0.7;
-    }
-
-    .hero-location {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--off-white);
-      opacity: 0.4;
-      text-align: right;
-    }
-
-    .hero-location span {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 4px;
-    }
-
-    /* subtle grain overlay */
-    .hero::after {
+    .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.4;
+      background: rgba(67, 30, 10, 0.65);
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 34px;
+      max-width: 1187px;
+      width: 100%;
+      padding: 0 48px;
+    }
+
+    .hero-logo {
+      width: 57px;
+      height: 70px;
+      object-fit: contain;
+    }
+
+    .hero-headlines {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .hero-headline {
+      font-family: "roc-grotesk-wide", sans-serif;
+      font-weight: 700;
+      font-size: clamp(60px, 9.1vw, 138px);
+      line-height: 0.85;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-family: "space-grotesk-variable", sans-serif;
+      font-weight: 500;
+      font-size: clamp(15px, 1.4vw, 21px);
+      line-height: 1.36;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: 740px;
+    }
+
+    .hero-byline {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 486px;
+      font-family: "space-grotesk-variable", sans-serif;
+      font-weight: 500;
+      font-size: clamp(14px, 1.4vw, 21px);
+      line-height: 1.36;
+      letter-spacing: -0.02em;
+      color: #fff;
     }
   </style>
 </head>
@@ -162,19 +171,19 @@
   </nav>
 
   <section class="hero">
-    <h1 class="hero-headline">
-      <span class="line-stroke">Systems</span>
-      <span class="line-fill">Designer</span>
-      <span class="line-accent">Who Ships.</span>
-    </h1>
-    <div class="hero-meta">
-      <div class="hero-descriptor">
-        <p>I get into the system, understand how it actually works, align the teams, and build things that scale. Broad industry experience. No-bullshit process.</p>
+    <div class="hero-bg">
+      <img src="https://www.figma.com/api/mcp/asset/46bcf49f-fd85-42dc-a9ae-4d1961ff9ce1" alt="" />
+    </div>
+    <div class="hero-container">
+      <img class="hero-logo" src="https://www.figma.com/api/mcp/asset/ce383d54-56b9-48f6-a1c0-0e0fc89d425f" alt="Hark logo" />
+      <div class="hero-headlines">
+        <h1 class="hero-headline">I Make Software Easy to Use</h1>
+        <p class="hero-sub">Honestly I make diagrams and interfaces that help people visualize their ideas, get others to see their vision, and produce the blueprints to build it.</p>
       </div>
-      <div class="hero-location">
-        <span>Based in</span>
-        Minneapolis, MN
-      </div>
+    </div>
+    <div class="hero-byline">
+      <span>Michael Szczepanski</span>
+      <span>Minneapolis, MN</span>
     </div>
   </section>
 
