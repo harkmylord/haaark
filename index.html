@@ -99,6 +99,7 @@
       justify-content: center;
       gap: 40px;
       overflow: hidden;
+      position: relative;
     }
 
     .hero-bg {
@@ -191,6 +192,28 @@
       letter-spacing: -0.02em;
       color: #fff;
     }
+
+    /* BELOW HERO — demonstrates data-speed parallax */
+    .work-section {
+      min-height: 100vh;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .work-section h2 {
+      font-family: "roc-grotesk-wide", sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 5vw, 80px);
+      color: var(--off-white);
+      text-transform: uppercase;
+      text-align: center;
+      opacity: 0.08;
+    }
   </style>
 </head>
 <body>
@@ -227,6 +250,10 @@
     </div>
   </section>
 
+  <section class="work-section" id="work">
+    <h2>Work coming soon</h2>
+  </section>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
   <script>
@@ -244,7 +271,7 @@
     const chars = gsap.utils.toArray('.hero-headline .char');
     const mid = (chars.length - 1) / 2;
 
-    // Master timeline scrubbed to the full hero scroll distance (300vh)
+    // Master timeline scrubbed to the hero's 300vh scroll
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.hero',
@@ -254,7 +281,7 @@
       }
     });
 
-    // 0–15%: subtext and byline fade out
+    // 0–15%: subtext + byline fade out
     tl.to(['.hero-sub', '.hero-byline'], {
       opacity: 0,
       y: -20,
@@ -270,39 +297,34 @@
       duration: 0.12,
     }, 0);
 
-    // 10–22%: nav hark logo fades in
+    // 10–22%: nav hark mark fades in
     tl.to('.nav-hark', {
       opacity: 1,
       ease: 'none',
       duration: 0.12,
     }, 0.1);
 
-    // 20–100%: letters drift up and outward like dandelion seeds
+    // 8–88%: letters disperse upward and outward like dandelion seeds
+    // Each letter's start is staggered across a 8% window — first letter leads, last follows
     chars.forEach((char, i) => {
       const offset = i - mid;
       const dir = offset < 0 ? -1 : 1;
       const mag = Math.abs(offset);
       const spread = window.innerWidth / chars.length * 2.5;
-
-      // horizontal: outward from center
-      const x = dir * mag * spread;
-      // vertical: all drift up — edge letters slightly less so they lag behind center
-      const y = -(window.innerHeight * 0.7 + mag * 15);
-      // rotation: each letter tilts outward
-      const rotation = offset * 7;
+      const staggerStart = 0.08 + (i / chars.length) * 0.08;
 
       tl.to(char, {
-        x,
-        y,
-        rotation,
+        x: dir * mag * spread,
+        y: -(window.innerHeight * 0.7 + mag * 15),
+        rotation: offset * 7,
         scale: 1 + mag * 0.08,
         opacity: 0,
         ease: 'power1.in',
-        duration: 0.8,
-      }, 0.08);
+        duration: 0.75,
+      }, staggerStart);
     });
 
-    // Scroll progress line — separate, tied to total page scroll
+    // Scroll progress line
     gsap.to('.scroll-line', {
       scaleY: 1,
       ease: 'none',
