@@ -277,16 +277,26 @@
       duration: 0.12,
     }, 0.1);
 
-    // 20–100%: letters break apart — each flies outward from center and scales up
+    // 20–100%: letters drift up and outward like dandelion seeds
     chars.forEach((char, i) => {
       const offset = i - mid;
       const dir = offset < 0 ? -1 : 1;
       const mag = Math.abs(offset);
-      const spread = window.innerWidth / chars.length * 3.5;
+      const spread = window.innerWidth / chars.length * 2.5;
+
+      // horizontal: outward from center
+      const x = dir * mag * spread;
+      // vertical: all drift up — edge letters slightly less so they lag behind center
+      const y = -(window.innerHeight * 0.7 + mag * 15);
+      // rotation: each letter tilts outward
+      const rotation = offset * 7;
 
       tl.to(char, {
-        x: dir * mag * spread,
-        scale: 1 + mag * 0.1,
+        x,
+        y,
+        rotation,
+        scale: 1 + mag * 0.08,
+        opacity: 0,
         ease: 'power1.in',
         duration: 0.8,
       }, 0.2);
