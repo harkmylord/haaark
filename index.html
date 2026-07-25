@@ -209,31 +209,12 @@
 
     .testimonials-bg img {
       position: absolute;
-      max-width: none;
-      pointer-events: none;
-    }
-
-    .testimonials-bg .bg-topology {
       inset: 0;
       width: 100%;
       height: 100%;
+      max-width: none;
       object-fit: cover;
-      opacity: 0.9;
-    }
-
-    .testimonials-bg .bg-glow {
-      inset: -25%;
-      width: 150%;
-      height: 150%;
-      object-fit: cover;
-      filter: blur(75px);
-      opacity: 0.4;
-    }
-
-    .testimonials-bg .bg-glow-tint {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 68, 255, 0.24);
+      pointer-events: none;
     }
 
     .testimonials-content {
@@ -417,9 +398,8 @@
 
   <section class="testimonials" id="testimonials">
     <div class="testimonials-bg" aria-hidden="true">
-      <img class="bg-topology" src="images/testimonials/bg-topology.jpg" alt="" />
-      <img class="bg-glow" src="images/testimonials/bg-glow.jpg" alt="" />
-      <div class="bg-glow-tint"></div>
+      <img class="bg-topology" src="images/testimonials/bg-layer-topology.jpg" alt="" />
+      <img class="bg-glow" src="images/testimonials/bg-layer-glow.jpg" alt="" />
     </div>
 
     <div class="testimonials-content">
