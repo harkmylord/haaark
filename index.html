@@ -204,18 +204,11 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      overflow: hidden;
-      background: #1b1b1b;
-    }
-
-    .testimonials-bg img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      object-fit: cover;
-      pointer-events: none;
+      background-color: #1b1b1b;
+      background-image: url('images/testimonials/bg-stacked.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .testimonials-content {
@@ -398,10 +391,7 @@
   </section>
 
   <section class="testimonials" id="testimonials">
-    <div class="testimonials-bg" aria-hidden="true">
-      <img class="bg-topology" src="images/testimonials/bg-layer-topology.jpg" alt="" />
-      <img class="bg-glow" src="images/testimonials/bg-layer-glow.jpg" alt="" />
-    </div>
+    <div class="testimonials-bg" aria-hidden="true"></div>
 
     <div class="testimonials-content">
       <h2>People enjoy working with me</h2>
