@@ -1,0 +1,25 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="83.9042" height="94" viewBox="0 0 83.9042 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Logomark wrapper" filter="url(#filter0_d_0_6)">
+<g id="Vector">
+<path d="M58.8074 76.7041C57.6313 79.329 56.1692 81.8996 54.4162 84.1238C68.9595 79.201 79.6655 65.9007 80.8441 49.9375H75.667C69.3492 49.9375 64.2743 55.0019 63.2473 61.2624C62.3007 67.0332 60.7862 72.288 58.8074 76.7041Z" fill="#F04000"/>
+<path d="M47.3566 49.9375C53.9713 49.9375 59.3822 55.4793 58.1673 62.0093C55.5284 76.1923 49.2622 86.1667 41.9521 86.1667C32.7023 86.1667 25.1238 70.1967 24.4507 49.9375H47.3566Z" fill="#F04000"/>
+<path d="M63.3818 33.5857C64.3491 39.9047 69.4475 45.0417 75.8135 45.0417H80.9042C80.1002 28.6448 69.2559 14.8993 54.4162 9.87621C56.1692 12.1004 57.6313 14.671 58.8074 17.2959C60.8828 21.9274 62.4473 27.4815 63.3818 33.5857Z" fill="#F04000"/>
+<path d="M58.3626 33.0875C59.4692 39.5844 54.0816 45.0417 47.5184 45.0417H24.4237C24.8809 24.3203 32.5537 7.83333 41.9521 7.83333C49.4492 7.83333 55.8483 18.3245 58.3626 33.0875Z" fill="#F04000"/>
+<path d="M19.5475 45.0417C19.769 34.4504 21.781 24.6957 25.0968 17.2959C26.2729 14.671 27.735 12.1004 29.488 9.87621C14.6483 14.8993 3.80397 28.6448 3 45.0417H19.5475Z" fill="#F04000"/>
+<path d="M3.06013 49.9375C4.23871 65.9007 14.9447 79.201 29.488 84.1238C27.735 81.8996 26.2729 79.329 25.0968 76.7041C21.8834 69.5329 19.8946 60.1501 19.5732 49.9375H3.06013Z" fill="#F04000"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_6" x="-0.0507812" y="-0.75" width="84" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="1.5" operator="erode" in="SourceAlpha" result="effect1_dropShadow_0_6"/>
+<feOffset dy="2.25"/>
+<feGaussianBlur stdDeviation="2.25"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.141176 0 0 0 0 0.141176 0 0 0 0 0.141176 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_6"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_6" result="shape"/>
+</filter>
+</defs>
+</svg>

@@ -25,7 +25,7 @@
       --off-white: #E8E0D5;
     }
 
-    html, body { height: 100%; overflow-x: hidden; }
+    html, body { height: 100%; overflow-x: clip; }
 
     body {
       background: var(--black);
@@ -168,23 +168,345 @@
       color: #fff;
     }
 
-    .work-section {
-      min-height: 100vh;
+    /* ---- Evolve (GSAP dots) ---- */
+
+    .evolve {
+      position: relative;
       background: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 48px;
     }
 
-    .work-section h2 {
+    .evolve-inner {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      padding: 80px 48px;
+    }
+
+    .evolve-eyebrow {
+      font-family: "space-grotesk-variable", sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .evolve-heading {
       font-family: "roc-grotesk-wide", sans-serif;
       font-weight: 700;
-      font-size: clamp(32px, 5vw, 80px);
-      color: var(--off-white);
+      font-size: clamp(26px, 3.4vw, 48px);
+      line-height: 1.08;
       text-transform: uppercase;
+      color: var(--off-white);
       text-align: center;
-      opacity: 0.08;
+      max-width: 780px;
+      margin-top: -24px;
+    }
+
+    .evolve-stage {
+      position: relative;
+      width: min(1100px, 90vw);
+      aspect-ratio: 1754 / 680;
+    }
+
+    .evolve-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .evolve-canvas .is-spinning {
+      animation: evolve-orbit 8s linear infinite;
+    }
+
+    @keyframes evolve-orbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .evolve-canvas .is-spinning { animation: none; }
+    }
+
+    /* ---- Projects ---- */
+
+    .projects {
+      background: var(--black);
+      padding: clamp(64px, 11vw, 130px) 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .projects-list {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 4.5vw, 56px);
+    }
+
+    /* Card shell */
+
+    .project-card {
+      position: relative;
+      container-type: inline-size;
+      width: 100%;
+      aspect-ratio: 1200 / 581;
+      border-radius: 20px;
+      overflow: hidden;
+      isolation: isolate;
+      background: #0c0d10;
+      color: #fff;
+    }
+
+    /* Background layers: photo, dark scrim, and two soft blurred color blobs
+       (an accent-color glow + a black shadow glow) standing in for the
+       blurred "Background - Elements" circles in the Figma file. */
+
+    .project-card-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .project-card-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .project-card-glow--accent {
+      left: -10%;
+      top: -75%;
+      width: 85%;
+      height: 165%;
+      background: radial-gradient(circle at 50% 45%, var(--card-accent, #38A0EF) 0%, transparent 68%);
+      filter: blur(48px);
+      opacity: 0.5;
+      mix-blend-mode: screen;
+    }
+
+    .project-card-glow--shadow {
+      left: -16%;
+      top: -58%;
+      width: 68%;
+      height: 145%;
+      background: #000;
+      filter: blur(60px);
+      opacity: 0.42;
+    }
+
+    .project-card-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--card-photo-position, center);
+    }
+
+    .project-card-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10, 10, 12, 0.1) 0%, rgba(10, 10, 12, 0.55) 48%, rgba(10, 10, 12, 0.94) 100%),
+        linear-gradient(90deg, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0.05) 46%);
+    }
+
+    /* Header: logomark + title + description */
+
+    .project-card-header {
+      position: absolute;
+      z-index: 1;
+      left: 6.25%;
+      top: 6.9%;
+      width: 48.83%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.33cqw, 16px);
+    }
+
+    .project-card-logo {
+      width: clamp(48px, 20cqw, 78px);
+      height: auto;
+    }
+
+    /* Soltec's mark is a tall, narrow glyph — scale it by height instead so
+       it doesn't read as oversized next to the other square-ish logomarks. */
+    .project-card-logo--narrow {
+      width: clamp(28px, 12cqw, 46px);
+    }
+
+    .project-card-header h3 {
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 4cqw, 48px);
+      line-height: clamp(38px, 5cqw, 60px);
+      letter-spacing: -0.02em;
+      color: #f7f7f7;
+    }
+
+    .project-card-header p {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: clamp(14px, 1.667cqw, 20px);
+      line-height: clamp(20px, 2.167cqw, 26px);
+      letter-spacing: -0.01em;
+      color: rgba(247, 247, 247, 0.92);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Tags row: TYPE / ROLE / INDUSTRY */
+
+    .project-card-tags {
+      position: absolute;
+      z-index: 1;
+      left: 6.25%;
+      top: 54.4%;
+      width: 48.33%;
+      display: flex;
+      gap: clamp(20px, 3.5cqw, 42px);
+    }
+
+    .project-card-tag dt {
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-card-tag dd {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 26px;
+      letter-spacing: -0.01em;
+      color: #fff;
+    }
+
+    .project-card-tag--wide { flex: 1; min-width: 0; }
+
+    /* Button */
+
+    .project-card-button {
+      position: absolute;
+      z-index: 1;
+      left: 6.25%;
+      top: 69.2%;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      background: #2e3236;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .project-card-button:hover { background: #3b4045; }
+
+    .project-card-button span {
+      font-family: "Geist", sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .project-card-button svg { flex-shrink: 0; }
+
+    /* Placeholder UI bento — stand-in screenshot blocks */
+
+    .project-card-mock {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+    }
+
+    .project-card-block {
+      position: absolute;
+      display: block;
+      border-radius: clamp(10px, 1.67cqw, 20px);
+      background: rgba(206, 207, 210, 0.92);
+    }
+
+    .project-card-block--a { left: 59.25%; top: 53.87%; width: 12.92%; height: 31.67%; }
+    .project-card-block--b { left: 63.83%; top: 8.61%;  width: 5.83%;  height: 13.08%; }
+    .project-card-block--c { left: 71.08%; top: 17.56%; width: 9.75%;  height: 21.86%; }
+    .project-card-block--d { left: 60.75%; top: 28.57%; width: 8.17%;  height: 18.42%; }
+    .project-card-block--e { left: 74.33%; top: 53.70%; width: 20.25%; height: 31.84%; }
+    .project-card-block--f { left: 83.0%;  top: 10.33%; width: 10.0%;  height: 38.90%; }
+    .project-card-block--g { display: none; }
+
+    /* Mobile structural layout — mirrors the Figma "Project - Mobile" frame:
+       header centers and stacks, the tags row disappears, the bento grid
+       swaps to a 5-block arrangement, and the button drops to the bottom.
+       The aspect-ratio swap has to be a viewport media query (a container
+       can't resize itself off its own inline-size query), tuned to flip at
+       the same point the card's own width crosses the 700px container
+       breakpoint below (700px card + 48px×2 section padding = 796px). */
+
+    @media (max-width: 796px) {
+      .project-card { aspect-ratio: 390 / 702; }
+    }
+
+    @container (max-width: 700px) {
+      .project-card-header {
+        left: 50%;
+        top: 5.84%;
+        width: 83.59%;
+        gap: 8px;
+        align-items: center;
+        text-align: center;
+        transform: translateX(-50%);
+      }
+
+      .project-card-logo { width: clamp(40px, 14cqw, 56px); }
+      .project-card-logo--narrow { width: clamp(24px, 10cqw, 34px); }
+
+      .project-card-header p { -webkit-line-clamp: 3; }
+
+      .project-card-tags { display: none; }
+
+      /* Blocks and the button anchor from the card's bottom edge instead of
+         the top on mobile — a longer (wrapped) description then grows
+         downward without shoving the bento grid out of place underneath it. */
+
+      .project-card-button {
+        left: 50%;
+        top: auto;
+        bottom: 13.25%;
+        transform: translateX(-50%);
+      }
+
+      .project-card-block--a,
+      .project-card-block--e { display: none; }
+
+      .project-card-block--g {
+        display: block;
+        left: 34.62%;
+        top: auto;
+        bottom: 32.05%;
+        width: 25.9%;
+        height: 13.39%;
+      }
+
+      .project-card-block--b { left: 11.54%; top: auto; bottom: 52.28%; width: 17.95%; height: 10.83%; }
+      .project-card-block--c { left: 36.15%; top: auto; bottom: 48.86%; width: 20.51%; height: 12.39%; }
+      .project-card-block--d { left: 5.38%;  top: auto; bottom: 37.46%; width: 25.13%; height: 12.54%; }
+      .project-card-block--f { left: 64.1%;  top: auto; bottom: 29.06%; width: 30.77%; height: 32.19%; }
     }
 
     /* ---- Testimonials ---- */
@@ -387,6 +709,174 @@
     <div class="hero-byline">
       <span>Michael Szczepanski</span>
       <span>Minneapolis, MN</span>
+    </div>
+  </section>
+
+  <section class="evolve" id="evolve">
+    <div class="evolve-inner">
+      <p class="evolve-eyebrow">How the work happens</p>
+      <h2 class="evolve-heading">Scattered thinking becomes a clear system</h2>
+      <div class="evolve-stage">
+        <svg class="evolve-canvas" viewBox="0 0 1754 680" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="work">
+    <div class="projects-list">
+
+      <article class="project-card" style="--card-accent: #06AED4; --card-photo-position: center 35%;">
+        <div class="project-card-media" aria-hidden="true">
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
+          <img class="project-card-photo" src="images/projects/luma-health.jpg" alt="" loading="lazy" />
+          <div class="project-card-scrim"></div>
+        </div>
+
+        <div class="project-card-header">
+          <img class="project-card-logo" src="images/projects/luma-logo.svg" alt="Luma Health logo" width="72" height="86" />
+          <div>
+            <h3>Luma Health</h3>
+            <p>Fast-growing GLP-1 telehealth startup with complex provider, patient, support, and pharmacy workflows.</p>
+          </div>
+        </div>
+
+        <dl class="project-card-tags">
+          <div class="project-card-tag"><dt>Type</dt><dd>Startup</dd></div>
+          <div class="project-card-tag"><dt>Role</dt><dd>Principal</dd></div>
+          <div class="project-card-tag project-card-tag--wide"><dt>Industry</dt><dd>Telehealth, Peptides, EHR, B2C</dd></div>
+        </dl>
+
+        <a class="project-card-button" href="#">
+          <span>View Project</span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M15.6125 11.4875L8.73746 18.3625C8.67358 18.4263 8.59775 18.477 8.51429 18.5116C8.43084 18.5461 8.34139 18.5639 8.25105 18.5639C8.16072 18.5639 8.07127 18.5461 7.98781 18.5116C7.90435 18.477 7.82852 18.4263 7.76465 18.3625C7.70077 18.2986 7.6501 18.2228 7.61553 18.1393C7.58096 18.0558 7.56317 17.9664 7.56317 17.8761C7.56317 17.7857 7.58096 17.6963 7.61553 17.6128C7.6501 17.5294 7.70077 17.4535 7.76465 17.3896L14.1541 11.0011L7.76465 4.61246C7.63564 4.48346 7.56317 4.30849 7.56317 4.12605C7.56317 3.94362 7.63564 3.76865 7.76465 3.63965C7.89365 3.51064 8.06862 3.43817 8.25105 3.43817C8.43349 3.43817 8.60846 3.51064 8.73746 3.63965L15.6125 10.5146C15.6764 10.5785 15.7271 10.6543 15.7617 10.7378C15.7963 10.8212 15.8141 10.9107 15.8141 11.0011C15.8141 11.0914 15.7963 11.1809 15.7617 11.2643C15.7271 11.3478 15.6764 11.4236 15.6125 11.4875Z" fill="white"/></svg>
+        </a>
+
+        <div class="project-card-mock" aria-hidden="true">
+          <span class="project-card-block project-card-block--a"></span>
+          <span class="project-card-block project-card-block--b"></span>
+          <span class="project-card-block project-card-block--c"></span>
+          <span class="project-card-block project-card-block--d"></span>
+          <span class="project-card-block project-card-block--e"></span>
+          <span class="project-card-block project-card-block--f"></span>
+          <span class="project-card-block project-card-block--g"></span>
+        </div>
+      </article>
+
+      <article class="project-card" style="--card-accent: #F04000; --card-photo-position: center 40%;">
+        <div class="project-card-media" aria-hidden="true">
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
+          <img class="project-card-photo" src="images/projects/employee-pulse.jpg" alt="" loading="lazy" />
+          <div class="project-card-scrim"></div>
+        </div>
+
+        <div class="project-card-header">
+          <img class="project-card-logo" src="images/projects/employee-pulse-logo.svg" alt="Employee Pulse logo" width="78" height="94" />
+          <div>
+            <h3>Employee Pulse</h3>
+            <p>An employee-engagement platform that turns confidential workforce feedback into actionable insights for managers and HR leaders.</p>
+          </div>
+        </div>
+
+        <dl class="project-card-tags">
+          <div class="project-card-tag"><dt>Type</dt><dd>Enterprise Platform</dd></div>
+          <div class="project-card-tag"><dt>Role</dt><dd>Senior</dd></div>
+          <div class="project-card-tag project-card-tag--wide"><dt>Industry</dt><dd>HRIS, Workforce Analytics, Scheduling</dd></div>
+        </dl>
+
+        <a class="project-card-button" href="#">
+          <span>View Project</span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M15.6125 11.4875L8.73746 18.3625C8.67358 18.4263 8.59775 18.477 8.51429 18.5116C8.43084 18.5461 8.34139 18.5639 8.25105 18.5639C8.16072 18.5639 8.07127 18.5461 7.98781 18.5116C7.90435 18.477 7.82852 18.4263 7.76465 18.3625C7.70077 18.2986 7.6501 18.2228 7.61553 18.1393C7.58096 18.0558 7.56317 17.9664 7.56317 17.8761C7.56317 17.7857 7.58096 17.6963 7.61553 17.6128C7.6501 17.5294 7.70077 17.4535 7.76465 17.3896L14.1541 11.0011L7.76465 4.61246C7.63564 4.48346 7.56317 4.30849 7.56317 4.12605C7.56317 3.94362 7.63564 3.76865 7.76465 3.63965C7.89365 3.51064 8.06862 3.43817 8.25105 3.43817C8.43349 3.43817 8.60846 3.51064 8.73746 3.63965L15.6125 10.5146C15.6764 10.5785 15.7271 10.6543 15.7617 10.7378C15.7963 10.8212 15.8141 10.9107 15.8141 11.0011C15.8141 11.0914 15.7963 11.1809 15.7617 11.2643C15.7271 11.3478 15.6764 11.4236 15.6125 11.4875Z" fill="white"/></svg>
+        </a>
+
+        <div class="project-card-mock" aria-hidden="true">
+          <span class="project-card-block project-card-block--a"></span>
+          <span class="project-card-block project-card-block--b"></span>
+          <span class="project-card-block project-card-block--c"></span>
+          <span class="project-card-block project-card-block--d"></span>
+          <span class="project-card-block project-card-block--e"></span>
+          <span class="project-card-block project-card-block--f"></span>
+          <span class="project-card-block project-card-block--g"></span>
+        </div>
+      </article>
+
+      <article class="project-card" style="--card-accent: #8270A5; --card-photo-position: center 30%;">
+        <div class="project-card-media" aria-hidden="true">
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
+          <img class="project-card-photo" src="images/projects/soltec-health.jpg" alt="" loading="lazy" />
+          <div class="project-card-scrim"></div>
+        </div>
+
+        <div class="project-card-header">
+          <img class="project-card-logo project-card-logo--narrow" src="images/projects/soltec-logo.svg" alt="Soltec Health logo" width="46" height="93" />
+          <div>
+            <h3>Soltec Health</h3>
+            <p>A wearable connected sleep tracker helping people set up their hardware, manage nightly sessions, and understand changes in their sleep over time.</p>
+          </div>
+        </div>
+
+        <dl class="project-card-tags">
+          <div class="project-card-tag"><dt>Type</dt><dd>Startup</dd></div>
+          <div class="project-card-tag"><dt>Role</dt><dd>Director</dd></div>
+          <div class="project-card-tag project-card-tag--wide"><dt>Industry</dt><dd>Health Tracking, Sleep Wellness, D2C, IoT</dd></div>
+        </dl>
+
+        <a class="project-card-button" href="#">
+          <span>View Project</span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M15.6125 11.4875L8.73746 18.3625C8.67358 18.4263 8.59775 18.477 8.51429 18.5116C8.43084 18.5461 8.34139 18.5639 8.25105 18.5639C8.16072 18.5639 8.07127 18.5461 7.98781 18.5116C7.90435 18.477 7.82852 18.4263 7.76465 18.3625C7.70077 18.2986 7.6501 18.2228 7.61553 18.1393C7.58096 18.0558 7.56317 17.9664 7.56317 17.8761C7.56317 17.7857 7.58096 17.6963 7.61553 17.6128C7.6501 17.5294 7.70077 17.4535 7.76465 17.3896L14.1541 11.0011L7.76465 4.61246C7.63564 4.48346 7.56317 4.30849 7.56317 4.12605C7.56317 3.94362 7.63564 3.76865 7.76465 3.63965C7.89365 3.51064 8.06862 3.43817 8.25105 3.43817C8.43349 3.43817 8.60846 3.51064 8.73746 3.63965L15.6125 10.5146C15.6764 10.5785 15.7271 10.6543 15.7617 10.7378C15.7963 10.8212 15.8141 10.9107 15.8141 11.0011C15.8141 11.0914 15.7963 11.1809 15.7617 11.2643C15.7271 11.3478 15.6764 11.4236 15.6125 11.4875Z" fill="white"/></svg>
+        </a>
+
+        <div class="project-card-mock" aria-hidden="true">
+          <span class="project-card-block project-card-block--a"></span>
+          <span class="project-card-block project-card-block--b"></span>
+          <span class="project-card-block project-card-block--c"></span>
+          <span class="project-card-block project-card-block--d"></span>
+          <span class="project-card-block project-card-block--e"></span>
+          <span class="project-card-block project-card-block--f"></span>
+          <span class="project-card-block project-card-block--g"></span>
+        </div>
+      </article>
+
+      <article class="project-card" style="--card-accent: #38A0EF; --card-photo-position: center 42%;">
+        <div class="project-card-media" aria-hidden="true">
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
+          <img class="project-card-photo" src="images/projects/constant-logistics.jpg" alt="" loading="lazy" />
+          <div class="project-card-scrim"></div>
+        </div>
+
+        <div class="project-card-header">
+          <img class="project-card-logo" src="images/projects/constant-logistics-logo.svg" alt="Constant Logistics logo" width="78" height="94" />
+          <div>
+            <h3>Constant Logistics</h3>
+            <p>A supply chain platform that helps retailers and suppliers coordinate orders, improve fulfillment, and understand performance.</p>
+          </div>
+        </div>
+
+        <dl class="project-card-tags">
+          <div class="project-card-tag"><dt>Type</dt><dd>Enterprise Platform</dd></div>
+          <div class="project-card-tag"><dt>Role</dt><dd>Senior</dd></div>
+          <div class="project-card-tag project-card-tag--wide"><dt>Industry</dt><dd>HRIS, Workforce Analytics, Scheduling</dd></div>
+        </dl>
+
+        <a class="project-card-button" href="#">
+          <span>View Project</span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M15.6125 11.4875L8.73746 18.3625C8.67358 18.4263 8.59775 18.477 8.51429 18.5116C8.43084 18.5461 8.34139 18.5639 8.25105 18.5639C8.16072 18.5639 8.07127 18.5461 7.98781 18.5116C7.90435 18.477 7.82852 18.4263 7.76465 18.3625C7.70077 18.2986 7.6501 18.2228 7.61553 18.1393C7.58096 18.0558 7.56317 17.9664 7.56317 17.8761C7.56317 17.7857 7.58096 17.6963 7.61553 17.6128C7.6501 17.5294 7.70077 17.4535 7.76465 17.3896L14.1541 11.0011L7.76465 4.61246C7.63564 4.48346 7.56317 4.30849 7.56317 4.12605C7.56317 3.94362 7.63564 3.76865 7.76465 3.63965C7.89365 3.51064 8.06862 3.43817 8.25105 3.43817C8.43349 3.43817 8.60846 3.51064 8.73746 3.63965L15.6125 10.5146C15.6764 10.5785 15.7271 10.6543 15.7617 10.7378C15.7963 10.8212 15.8141 10.9107 15.8141 11.0011C15.8141 11.0914 15.7963 11.1809 15.7617 11.2643C15.7271 11.3478 15.6764 11.4236 15.6125 11.4875Z" fill="white"/></svg>
+        </a>
+
+        <div class="project-card-mock" aria-hidden="true">
+          <span class="project-card-block project-card-block--a"></span>
+          <span class="project-card-block project-card-block--b"></span>
+          <span class="project-card-block project-card-block--c"></span>
+          <span class="project-card-block project-card-block--d"></span>
+          <span class="project-card-block project-card-block--e"></span>
+          <span class="project-card-block project-card-block--f"></span>
+          <span class="project-card-block project-card-block--g"></span>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -779,16 +1269,137 @@
     </div>
   </section>
 
-  <section class="work-section" id="work">
-    <h2>Work coming soon</h2>
-  </section>
-
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollSmoother.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/SplitText.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+  </script>
+
+  <script>
+    (function () {
+      // Dot cloud + connection data extracted from the Figma "GSAP Dots" frame (node 2211:1070),
+      // resolved to one persistent set of dots (a 1754x680 viewBox) that transforms in place as the
+      // user scrolls, rather than separate images being swapped.
+      var MASTER = [[339.3,295.4,36.0],[542.5,603.8,36.0],[769.8,419.5,36.0],[449.5,369.8,36.0],[1001.9,287.2,36.0],[1368.9,516.9,36.0],[1411.4,378.0,36.0],[542.5,483.8,24.0],[871.7,530.9,24.0],[941.5,613.8,24.0],[784.9,545.2,24.0],[1145.5,608.8,24.0],[899.9,375.1,24.0],[1045.8,428.7,24.0],[829.0,322.6,24.0],[1118.5,303.8,24.0],[1193.3,346.0,24.0],[665.2,298.5,24.0],[658.4,545.8,24.0],[1101.5,536.1,24.0],[1286.5,415.8,24.0],[364.2,455.1,12.0],[1209.0,479.3,12.0],[413.8,498.8,12.0],[1129.5,432.8,12.0],[655.8,247.4,12.0],[1026.6,637.0,12.0],[1326.5,322.8,12.0],[976.0,519.6,12.0],[1215.5,567.8,12.0],[1392.5,307.8,12.0],[896.3,459.6,12.0],[1331.5,266.8,12.0],[1240.5,286.8,12.0],[955.5,348.8,12.0],[1069.5,353.8,12.0],[847.5,247.8,12.0],[648.5,389.8,12.0],[736.5,327.8,12.0],[712.5,593.8,12.0],[852.5,625.8,12.0],[1026.5,571.8,12.0],[1169.5,531.8,12.0],[1302.5,499.8,12.0],[1314.5,596.8,12.0],[398.8,565.0,12.0],[327.1,613.9,12.0],[648.0,486.8,12.0],[530.5,416.8,12.0],[585.6,340.2,12.0],[488.5,286.8,12.0],[1407.9,439.4,12.0],[1130.1,216.0,12.0],[993.5,464.8,12.0]];
+      var CORE_LINES = [[339.3,295.4,449.5,369.8],[449.5,369.8,542.5,483.8],[542.5,483.8,542.5,603.8],[542.5,603.8,658.4,545.8],[658.4,545.8,784.9,545.2],[784.9,545.2,871.7,530.9],[871.7,530.9,941.5,613.8],[941.5,613.8,1101.5,536.1],[1101.5,536.1,1145.5,608.8],[1145.5,608.8,1045.8,428.7],[1045.8,428.7,1118.5,303.8],[1118.5,303.8,1193.3,346.0],[1193.3,346.0,1286.5,415.8],[1286.5,415.8,1368.9,516.9],[1368.9,516.9,1411.4,378.0],[1001.9,287.2,899.9,375.1],[899.9,375.1,829.0,322.6],[829.0,322.6,769.8,419.5],[769.8,419.5,665.2,298.5]];
+      var FINAL_IDX = [1,2,3,31,39,43,44,53];
+      var FINAL_LINES = [[449.5,369.8,542.5,603.8],[542.5,603.8,712.5,593.8],[712.5,593.8,769.8,419.5],[769.8,419.5,896.3,459.6],[896.3,459.6,993.5,464.8],[993.5,464.8,1302.5,499.8],[1302.5,499.8,1314.5,596.8]];
+      var DIM_IDX = [0,3,4,5,7,9,10,13,15,21,22,23,25,27,29,30,32,33,37,38,41,48,49,50,51,52,53];
+      var RING_DOT = [769.8,419.5,36.0];
+      var ORBIT_DOT = [896.3,459.6,12.0];
+      var RING_R = 100;
+
+      var SVG_NS = "http://www.w3.org/2000/svg";
+
+      function makeLine(l) {
+        var line = document.createElementNS(SVG_NS, "line");
+        line.setAttribute("x1", l[0]);
+        line.setAttribute("y1", l[1]);
+        line.setAttribute("x2", l[2]);
+        line.setAttribute("y2", l[3]);
+        line.setAttribute("stroke", "#fff");
+        line.setAttribute("stroke-opacity", 0);
+        line.setAttribute("stroke-width", 4);
+        line.setAttribute("stroke-linecap", "round");
+        var len = Math.hypot(l[2] - l[0], l[3] - l[1]);
+        line.setAttribute("stroke-dasharray", len);
+        line.setAttribute("stroke-dashoffset", len);
+        return line;
+      }
+
+      var canvas = document.querySelector(".evolve-canvas");
+      if (!canvas) return;
+
+      var coreLineEls = CORE_LINES.map(makeLine);
+      var finalLineEls = FINAL_LINES.map(makeLine);
+      coreLineEls.forEach(function (el) { canvas.appendChild(el); });
+      finalLineEls.forEach(function (el) { canvas.appendChild(el); });
+
+      // All dots start at full brightness, matching the Figma reference's first state —
+      // only the scattered dim-set (stage 1) and later fades pull opacity down from here.
+      var dotEls = MASTER.map(function (d) {
+        var circle = document.createElementNS(SVG_NS, "circle");
+        circle.setAttribute("cx", d[0]);
+        circle.setAttribute("cy", d[1]);
+        circle.setAttribute("r", d[2]);
+        circle.setAttribute("fill", "#fff");
+        circle.setAttribute("opacity", 1);
+        canvas.appendChild(circle);
+        return circle;
+      });
+
+      function findIndex(dot) {
+        for (var i = 0; i < MASTER.length; i++) {
+          if (MASTER[i][0] === dot[0] && MASTER[i][1] === dot[1] && MASTER[i][2] === dot[2]) return i;
+        }
+        return -1;
+      }
+
+      var ringIdx = findIndex(RING_DOT);
+      var orbitIdx = findIndex(ORBIT_DOT);
+      var ringEl = dotEls[ringIdx];
+      var orbitEl = dotEls[orbitIdx];
+      ringEl.setAttribute("stroke", "#fff");
+      ringEl.setAttribute("stroke-width", 4);
+      ringEl.setAttribute("stroke-opacity", 0);
+
+      var coreIdx = {};
+      CORE_LINES.forEach(function (l) {
+        [[l[0], l[1]], [l[2], l[3]]].forEach(function (p) {
+          MASTER.forEach(function (d, i) {
+            if (d[0] === p[0] && d[1] === p[1]) coreIdx[i] = true;
+          });
+        });
+      });
+      var coreEls = Object.keys(coreIdx).map(function (i) { return dotEls[i]; });
+
+      var finalEls = FINAL_IDX.map(function (i) { return dotEls[i]; });
+      var finalExtraEls = FINAL_IDX.filter(function (i) { return i !== ringIdx && i !== orbitIdx; })
+        .map(function (i) { return dotEls[i]; });
+      var nonFinalEls = dotEls.filter(function (el, i) { return FINAL_IDX.indexOf(i) === -1; });
+      var dimEls = DIM_IDX.map(function (i) { return dotEls[i]; });
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#evolve",
+          start: "top top",
+          end: "+=400%",
+          scrub: 1,
+          pin: ".evolve-inner",
+          anticipatePin: 1,
+          onUpdate: function (self) {
+            if (self.progress > 0.995) {
+              orbitEl.classList.add("is-spinning");
+              orbitEl.style.transformOrigin = RING_DOT[0] + "px " + RING_DOT[1] + "px";
+            } else {
+              orbitEl.classList.remove("is-spinning");
+            }
+          }
+        },
+        defaults: { ease: "none", duration: 1 }
+      });
+
+      // Stage 1: a scattered subset of dots settles from full opacity down to 28%.
+      tl.to(dimEls, { opacity: 0.28 })
+        .to({}, { duration: 0.3 })
+        // Stage 2: the larger dots brighten back up and draw connecting lines between them.
+        .to(coreEls, { opacity: 1 }, ">")
+        .to(coreLineEls, { strokeDashoffset: 0, strokeOpacity: 0.9, stagger: 0.03 }, "<")
+        .to({}, { duration: 0.3 })
+        // Stage 3: simplify — most dots and the core lines fade away, a cleaner path draws in.
+        .to(coreLineEls, { strokeOpacity: 0 }, ">")
+        .to(nonFinalEls, { opacity: 0, stagger: 0.01 }, "<")
+        .to(finalEls, { opacity: 1 }, "<")
+        .to(finalLineEls, { strokeDashoffset: 0, strokeOpacity: 0.9, stagger: 0.05 }, "<+0.1")
+        .to({}, { duration: 0.3 })
+        // Stage 4: the diagram resolves into a single ring with an orbiting dot.
+        .to(finalLineEls, { strokeOpacity: 0 }, ">")
+        .to(finalExtraEls, { opacity: 0 }, "<")
+        .to(ringEl, { attr: { r: RING_R }, fillOpacity: 0, strokeOpacity: 0.9 }, "<")
+        .to(orbitEl, { attr: { cx: RING_DOT[0] + RING_R, cy: RING_DOT[1], r: 8 } }, "<");
+    })();
   </script>
 
 </body>
