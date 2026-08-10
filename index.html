@@ -260,45 +260,20 @@
       border-radius: 20px;
       overflow: hidden;
       isolation: isolate;
-      background: #0c0d10;
+      background: #001a4d;
       color: #fff;
     }
 
-    /* Background layers: photo, dark scrim, and two soft blurred color blobs
-       (an accent-color glow + a black shadow glow) standing in for the
-       blurred "Background - Elements" circles in the Figma file. */
+    /* Background layers, stacked to match the Figma paint order (photo →
+       dark scrim → red warmth wash → accent-color glow → black shadow
+       glow). Figma paints its blurred color ellipses ON TOP of the dark
+       gradient, not underneath it — that's what lets the color read
+       through as a rich tint instead of getting muted by the scrim. */
 
     .project-card-media {
       position: absolute;
       inset: 0;
       z-index: 0;
-    }
-
-    .project-card-glow {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .project-card-glow--accent {
-      left: -10%;
-      top: -75%;
-      width: 85%;
-      height: 165%;
-      background: radial-gradient(circle at 50% 45%, var(--card-accent, #38A0EF) 0%, transparent 68%);
-      filter: blur(48px);
-      opacity: 0.5;
-      mix-blend-mode: screen;
-    }
-
-    .project-card-glow--shadow {
-      left: -16%;
-      top: -58%;
-      width: 68%;
-      height: 145%;
-      background: #000;
-      filter: blur(60px);
-      opacity: 0.42;
     }
 
     .project-card-photo {
@@ -310,12 +285,54 @@
       object-position: var(--card-photo-position, center);
     }
 
+    /* Matches Figma's actual "Background - Gradient" layer almost exactly:
+       a single fade from transparent warm-brown to solid #1e1e1e by ~51%
+       down. It's much lighter than it looks like it should be — that
+       restraint is what leaves room for the color layers above to read. */
+
     .project-card-scrim {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(10, 10, 12, 0.1) 0%, rgba(10, 10, 12, 0.55) 48%, rgba(10, 10, 12, 0.94) 100%),
-        linear-gradient(90deg, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0.05) 46%);
+      background: linear-gradient(180deg, rgba(39, 12, 12, 0) 0%, #1e1e1e 50.9%);
+    }
+
+    /* A broad, soft red wash — stands in for Figma's grainy red ellipse,
+       which is present (at low opacity) behind every card regardless of
+       accent color and is a big part of why the photos read warm. */
+
+    .project-card-warmth {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(140% 130% at 58% 10%, rgba(255, 45, 20, 0.55) 0%, rgba(255, 45, 20, 0.24) 48%, rgba(255, 45, 20, 0.08) 82%, transparent 100%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .project-card-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .project-card-glow--accent {
+      left: -4%;
+      top: -65%;
+      width: 108%;
+      height: 190%;
+      background: radial-gradient(ellipse at 50% 40%, var(--card-accent, #38A0EF) 0%, transparent 72%);
+      filter: blur(70px);
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+    }
+
+    .project-card-glow--shadow {
+      left: -16%;
+      top: -55%;
+      width: 66%;
+      height: 140%;
+      background: #000;
+      filter: blur(70px);
+      opacity: 0.35;
     }
 
     /* Header: logomark + title + description */
@@ -728,10 +745,11 @@
 
       <article class="project-card" style="--card-accent: #06AED4; --card-photo-position: center 35%;">
         <div class="project-card-media" aria-hidden="true">
-          <div class="project-card-glow project-card-glow--accent"></div>
-          <div class="project-card-glow project-card-glow--shadow"></div>
           <img class="project-card-photo" src="images/projects/luma-health.jpg" alt="" loading="lazy" />
           <div class="project-card-scrim"></div>
+          <div class="project-card-warmth"></div>
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
         </div>
 
         <div class="project-card-header">
@@ -766,10 +784,11 @@
 
       <article class="project-card" style="--card-accent: #F04000; --card-photo-position: center 40%;">
         <div class="project-card-media" aria-hidden="true">
-          <div class="project-card-glow project-card-glow--accent"></div>
-          <div class="project-card-glow project-card-glow--shadow"></div>
           <img class="project-card-photo" src="images/projects/employee-pulse.jpg" alt="" loading="lazy" />
           <div class="project-card-scrim"></div>
+          <div class="project-card-warmth"></div>
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
         </div>
 
         <div class="project-card-header">
@@ -804,10 +823,11 @@
 
       <article class="project-card" style="--card-accent: #8270A5; --card-photo-position: center 30%;">
         <div class="project-card-media" aria-hidden="true">
-          <div class="project-card-glow project-card-glow--accent"></div>
-          <div class="project-card-glow project-card-glow--shadow"></div>
           <img class="project-card-photo" src="images/projects/soltec-health.jpg" alt="" loading="lazy" />
           <div class="project-card-scrim"></div>
+          <div class="project-card-warmth"></div>
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
         </div>
 
         <div class="project-card-header">
@@ -842,10 +862,11 @@
 
       <article class="project-card" style="--card-accent: #38A0EF; --card-photo-position: center 42%;">
         <div class="project-card-media" aria-hidden="true">
-          <div class="project-card-glow project-card-glow--accent"></div>
-          <div class="project-card-glow project-card-glow--shadow"></div>
           <img class="project-card-photo" src="images/projects/constant-logistics.jpg" alt="" loading="lazy" />
           <div class="project-card-scrim"></div>
+          <div class="project-card-warmth"></div>
+          <div class="project-card-glow project-card-glow--accent"></div>
+          <div class="project-card-glow project-card-glow--shadow"></div>
         </div>
 
         <div class="project-card-header">
