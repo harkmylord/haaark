@@ -700,6 +700,74 @@
       color: #969696;
       white-space: nowrap;
     }
+
+    /* ---- Outro (closing "Michael" hero) ---- */
+
+    .outro {
+      position: relative;
+      min-height: 92vh;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px clamp(56px, 10vw, 152px);
+    }
+
+    .outro-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .outro-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 62% center;
+    }
+
+    .outro-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(2.5px);
+      background: linear-gradient(180deg, rgba(39, 12, 12, 0) 75%, rgba(39, 12, 12, 0.6) 100%);
+    }
+
+    .outro-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 1416px;
+    }
+
+    .outro-heading {
+      font-family: "roc-grotesk-wide", sans-serif;
+      font-weight: 700;
+      font-size: clamp(48px, 6.4vw, 96px);
+      line-height: 0.85;
+      color: var(--red);
+    }
+
+    .outro-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .outro-copy p {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.36;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: 615px;
+    }
   </style>
 </head>
 <body>
@@ -1289,6 +1357,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outro">
+    <div class="outro-bg" aria-hidden="true">
+      <img src="images/michael-outro.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="outro-content">
+      <h2 class="outro-heading">Michael</h2>
+      <div class="outro-copy">
+        <p>Honestly I make diagrams and interfaces that help people visualize their ideas, get others to see their vision, and produce the blueprints to build it.</p>
+        <p>Honestly I make diagrams and interfaces that help people visualize their ideas, get others to see their vision, and produce the blueprints to build it.</p>
       </div>
     </div>
   </section>
